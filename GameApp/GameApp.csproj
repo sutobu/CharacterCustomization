@@ -30,6 +30,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Data\CharacterDbContext.cs">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <Page Update="Views\EditCharacterWindow.xaml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Page>

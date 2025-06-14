@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GameApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250614201516_InitialCreate")]
+    [Migration("20250614211938_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -150,8 +150,9 @@ namespace GameApp.Migrations
             modelBuilder.Entity("GameApp.Models.Equipment", b =>
                 {
                     b.HasOne("GameApp.Models.Class", "Class")
-                        .WithMany()
-                        .HasForeignKey("ClassId");
+                        .WithMany("Equipment")
+                        .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Class");
                 });
@@ -164,11 +165,14 @@ namespace GameApp.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GameApp.Models.Class", null)
+                    b.HasOne("GameApp.Models.Class", "Class")
                         .WithMany("Skills")
-                        .HasForeignKey("ClassId");
+                        .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Character");
+
+                    b.Navigation("Class");
                 });
 
             modelBuilder.Entity("GameApp.Models.Character", b =>
@@ -179,6 +183,8 @@ namespace GameApp.Migrations
             modelBuilder.Entity("GameApp.Models.Class", b =>
                 {
                     b.Navigation("Characters");
+
+                    b.Navigation("Equipment");
 
                     b.Navigation("Skills");
                 });

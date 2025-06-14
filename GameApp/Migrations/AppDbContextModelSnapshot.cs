@@ -147,8 +147,9 @@ namespace GameApp.Migrations
             modelBuilder.Entity("GameApp.Models.Equipment", b =>
                 {
                     b.HasOne("GameApp.Models.Class", "Class")
-                        .WithMany()
-                        .HasForeignKey("ClassId");
+                        .WithMany("Equipment")
+                        .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Class");
                 });
@@ -161,11 +162,14 @@ namespace GameApp.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GameApp.Models.Class", null)
+                    b.HasOne("GameApp.Models.Class", "Class")
                         .WithMany("Skills")
-                        .HasForeignKey("ClassId");
+                        .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Character");
+
+                    b.Navigation("Class");
                 });
 
             modelBuilder.Entity("GameApp.Models.Character", b =>
@@ -176,6 +180,8 @@ namespace GameApp.Migrations
             modelBuilder.Entity("GameApp.Models.Class", b =>
                 {
                     b.Navigation("Characters");
+
+                    b.Navigation("Equipment");
 
                     b.Navigation("Skills");
                 });

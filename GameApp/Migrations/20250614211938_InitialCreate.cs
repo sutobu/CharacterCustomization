@@ -60,7 +60,8 @@ namespace GameApp.Migrations
                         name: "FK_Equipment_Classes_ClassId",
                         column: x => x.ClassId,
                         principalTable: "Classes",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -87,7 +88,8 @@ namespace GameApp.Migrations
                         name: "FK_Skills_Classes_ClassId",
                         column: x => x.ClassId,
                         principalTable: "Classes",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
