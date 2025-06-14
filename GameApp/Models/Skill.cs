@@ -14,5 +14,8 @@ namespace GameApp.Models
 
         public int CharacterId { get; set; }
         public Character Character { get; set; }
+
+        public int? ClassId { get; set; }
+        public Class Class { get; set; }
     }
 }

@@ -12,10 +12,11 @@ namespace GameApp.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public int Level { get; set; }
+
         public int ClassId { get; set; }
         public Class Class { get; set; }
 
-        public List<Skill> Skills { get; set; }
-        public List<Equipment> Equipment { get; set; }
+        public List<Skill> Skills { get; set; } = new();
+        public List<Equipment> Equipment { get; set; } = new();
     }
 }

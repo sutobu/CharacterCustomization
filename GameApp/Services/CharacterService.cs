@@ -45,5 +45,32 @@ namespace GameApp.Services
                 await _context.SaveChangesAsync();
             }
         }
+
+        internal async Task<List<Class>> GetClassesAsync()
+        {
+            return await _context.Classes.ToListAsync();
+        }
+
+        internal async Task AddClassAsync(Class @class)
+        {
+            _context.Classes.Add(@class);
+            await _context.SaveChangesAsync();
+        }
+
+        internal async Task UpdateClassAsync(Class updatedClass)
+        {
+            _context.Classes.Update(updatedClass);
+            await _context.SaveChangesAsync();
+        }
+
+        internal async Task DeleteClassAsync(int id)
+        {
+            var classToDelete = await _context.Classes.FindAsync(id);
+            if (classToDelete != null)
+            {
+                _context.Classes.Remove(classToDelete);
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }

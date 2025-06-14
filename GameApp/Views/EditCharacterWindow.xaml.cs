@@ -51,6 +51,11 @@ namespace GameApp.Views
         {
 
         }
+        private void AddCharacter_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new EditCharacterWindow();
+            window.ShowDialog(); // показываем окно
+        }
     }
 }
 
