@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.IO;
 using Microsoft.EntityFrameworkCore;
 using GameApp.Models;
 
@@ -14,15 +11,21 @@ namespace GameApp.Data
         public DbSet<Class> Classes { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public DbSet<Equipment> Equipment { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=gamecharacters.db");
+            // Use database file from project root directory (consistent with EF migrations)
+            var projectRoot = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\.."));
+            var dbPath = Path.Combine(projectRoot, "GameCharacters.db");
+
+            optionsBuilder.UseSqlite($"Data Source={dbPath}");
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // Many-to-many Character <-> Equipment через таблицу CharacterEquipment
+            // Many-to-many Character <-> Equipment
             modelBuilder.Entity<Character>()
                 .HasMany(c => c.Equipment)
                 .WithMany(e => e.Characters)

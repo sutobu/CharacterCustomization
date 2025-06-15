@@ -9,17 +9,19 @@ namespace GameApp.Views
 {
     public partial class MainWindow : Window
     {
-        private readonly CharacterService _service = new();
+        private readonly CharacterService _service;
         private List<Character> _characters;
 
         public MainWindow()
         {
             InitializeComponent();
+            _service = new CharacterService(new AppDbContext());
             Loaded += MainWindow_Loaded;
         }
 
         private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            await SeedTestClassesAsync();
             await LoadCharacters();
         }
 
@@ -31,7 +33,7 @@ namespace GameApp.Views
 
         private async void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            var window = new EditCharacterWindow();
+            var window = new EditCharacterWindow(_service); // ✅ Pass the service here
             if (window.ShowDialog() == true)
             {
                 await _service.AddCharacterAsync(window.Character);
@@ -43,7 +45,7 @@ namespace GameApp.Views
         {
             if (CharacterGrid.SelectedItem is Character selected)
             {
-                var window = new EditCharacterWindow(selected);
+                var window = new EditCharacterWindow(_service, selected); // ✅ Pass the service and character
                 if (window.ShowDialog() == true)
                 {
                     await _service.UpdateCharacterAsync(window.Character);
@@ -55,6 +57,18 @@ namespace GameApp.Views
                 MessageBox.Show("Выберите персонажа для редактирования.");
             }
         }
+
+        private async Task SeedTestClassesAsync()
+        {
+            var existingClasses = await _service.GetClassesAsync();
+            if (existingClasses == null || !existingClasses.Any())
+            {
+                await _service.AddClassAsync(new Class { Name = "Warrior" });
+                await _service.AddClassAsync(new Class { Name = "Mage" });
+                await _service.AddClassAsync(new Class { Name = "Archer" });
+            }
+        }
+
 
         private async void DeleteButton_Click(object sender, RoutedEventArgs e)
         {

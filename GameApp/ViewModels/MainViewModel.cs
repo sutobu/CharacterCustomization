@@ -14,8 +14,8 @@ namespace GameApp.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-        private readonly CharacterService _characterService = new();
-        public ObservableCollection<Character> Characters { get; set; } = new();
+        private readonly CharacterService _characterService;
+        public ObservableCollection<Character> Characters { get; set; }
 
         private Character _selectedCharacter;
         public Character SelectedCharacter

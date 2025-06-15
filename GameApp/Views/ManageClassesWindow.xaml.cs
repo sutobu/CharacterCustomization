@@ -1,19 +1,22 @@
 ﻿using GameApp.Models;
 using GameApp.Services;
+using GameApp.Data;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace GameApp.Views
 {
     public partial class ManageClassesWindow : Window
     {
-        private readonly CharacterService _service = new();
+        private readonly CharacterService _service;
         private List<Class> _classes;
 
         public ManageClassesWindow()
         {
             InitializeComponent();
-            Loaded += async (sender, e) => await ManageClassesWindow_Loaded(); // Use an async lambda for the Loaded event
+            _service = new CharacterService(new AppDbContext());
+            Loaded += async (sender, e) => await ManageClassesWindow_Loaded();
         }
 
         private async Task ManageClassesWindow_Loaded()
@@ -28,7 +31,7 @@ namespace GameApp.Views
             if (!string.IsNullOrWhiteSpace(name))
             {
                 await _service.AddClassAsync(new Class { Name = name });
-                await Refresh(); // Await the Refresh method
+                await Refresh();
             }
         }
 
@@ -41,7 +44,7 @@ namespace GameApp.Views
                 {
                     selected.Name = name;
                     await _service.UpdateClassAsync(selected);
-                    await Refresh(); // Await the Refresh method
+                    await Refresh();
                 }
             }
         }
@@ -52,8 +55,8 @@ namespace GameApp.Views
             {
                 if (MessageBox.Show("Удалить этот класс?", "Подтверждение", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
-                    await _service.DeleteClassAsync(selected.Id); // Pass the Id of the class
-                    await Refresh(); // Await the Refresh method
+                    await _service.DeleteClassAsync(selected.Id);
+                    await Refresh();
                 }
             }
         }
@@ -61,8 +64,8 @@ namespace GameApp.Views
         private async Task Refresh()
         {
             _classes = await _service.GetClassesAsync();
-            ClassListBox.ItemsSource = null; // Clear the ItemsSource
-            ClassListBox.ItemsSource = _classes; // Reassign the updated list
+            ClassListBox.ItemsSource = null;
+            ClassListBox.ItemsSource = _classes;
         }
 
         private string Prompt(string message, string defaultValue = "")

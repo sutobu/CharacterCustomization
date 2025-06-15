@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using GameApp.Data;
 using GameApp.Models;
 using Microsoft.EntityFrameworkCore;
-
 
 namespace GameApp.Services
 {
@@ -14,9 +11,9 @@ namespace GameApp.Services
     {
         private readonly AppDbContext _context;
 
-        public CharacterService()
+        public CharacterService(AppDbContext context)
         {
-            _context = new AppDbContext();
+            _context = context;
         }
 
         public async Task<List<Character>> GetCharactersAsync()
@@ -46,31 +43,31 @@ namespace GameApp.Services
             }
         }
 
-      internal async Task<List<Class>> GetClassesAsync()
-{
-    return await _context.Classes.ToListAsync();
-}
+        internal async Task<List<Class>> GetClassesAsync()
+        {
+            return await _context.Classes.ToListAsync();
+        }
 
-internal async Task AddClassAsync(Class @class)
-{
-    _context.Classes.Add(@class);
-    await _context.SaveChangesAsync();
-}
+        internal async Task AddClassAsync(Class @class)
+        {
+            _context.Classes.Add(@class);
+            await _context.SaveChangesAsync();
+        }
 
-internal async Task UpdateClassAsync(Class updatedClass)
-{
-    _context.Classes.Update(updatedClass);
-    await _context.SaveChangesAsync();
-}
+        internal async Task UpdateClassAsync(Class updatedClass)
+        {
+            _context.Classes.Update(updatedClass);
+            await _context.SaveChangesAsync();
+        }
 
-internal async Task DeleteClassAsync(int id)
-{
-    var classToDelete = await _context.Classes.FindAsync(id);
-    if (classToDelete != null)
-    {
-        _context.Classes.Remove(classToDelete);
-        await _context.SaveChangesAsync();
-    }
-}
+        internal async Task DeleteClassAsync(int id)
+        {
+            var classToDelete = await _context.Classes.FindAsync(id);
+            if (classToDelete != null)
+            {
+                _context.Classes.Remove(classToDelete);
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }

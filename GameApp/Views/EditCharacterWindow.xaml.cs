@@ -1,61 +1,61 @@
-﻿using GameApp.Data;
-using GameApp.Models;
+﻿using GameApp.Models;
 using GameApp.Services;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Windows;
-
 
 namespace GameApp.Views
 {
     public partial class EditCharacterWindow : Window
     {
         public Character Character { get; private set; }
-        private readonly CharacterService _service = new();
+        private readonly CharacterService _service;
         private List<Class> _classes;
 
-        public EditCharacterWindow(Character character = null)
+        public EditCharacterWindow(CharacterService service, Character character = null)
         {
             InitializeComponent();
-            LoadClasses();
+            _service = service;
+            Character = character;
 
-            if (character != null)
-            {
-                Character = character;
-                NameBox.Text = character.Name;
-                LevelBox.Text = character.Level.ToString();
-                ClassComboBox.SelectedValue = character.ClassId;
-            }
+            Loaded += EditCharacterWindow_Loaded; // ✅ Delay loading until UI is ready
         }
 
-        private async void LoadClasses()
+        private async void EditCharacterWindow_Loaded(object sender, RoutedEventArgs e)
         {
-           
+            _classes = await _service.GetClassesAsync(); // ✅ Load from database
             ClassComboBox.ItemsSource = _classes;
             ClassComboBox.DisplayMemberPath = "Name";
             ClassComboBox.SelectedValuePath = "Id";
+
+            if (Character != null)
+            {
+                NameBox.Text = Character.Name;
+                LevelBox.Text = Character.Level.ToString();
+                ClassComboBox.SelectedValue = Character.ClassId;
+            }
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            if (!int.TryParse(LevelBox.Text, out int level))
+            {
+                MessageBox.Show("Введите корректный уровень.");
+                return;
+            }
+
+            if (ClassComboBox.SelectedValue == null)
+            {
+                MessageBox.Show("Выберите класс.");
+                return;
+            }
+
             Character ??= new Character();
             Character.Name = NameBox.Text;
-            Character.Level = int.Parse(LevelBox.Text);
+            Character.Level = level;
             Character.ClassId = (int)ClassComboBox.SelectedValue;
 
             DialogResult = true;
             Close();
         }
-
-        private void NameBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
-        {
-
-        }
-        private void AddCharacter_Click(object sender, RoutedEventArgs e)
-        {
-            var window = new EditCharacterWindow();
-            window.ShowDialog(); // показываем окно
-        }
     }
 }
-
