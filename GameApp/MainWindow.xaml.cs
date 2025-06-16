@@ -33,7 +33,7 @@ namespace GameApp.Views
 
         private async void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            var window = new EditCharacterWindow(_service); // ✅ Pass the service here
+            var window = new EditCharacterWindow(_service);
             if (window.ShowDialog() == true)
             {
                 await _service.AddCharacterAsync(window.Character);
@@ -45,7 +45,7 @@ namespace GameApp.Views
         {
             if (CharacterGrid.SelectedItem is Character selected)
             {
-                var window = new EditCharacterWindow(_service, selected); // ✅ Pass the service and character
+                var window = new EditCharacterWindow(_service, selected);
                 if (window.ShowDialog() == true)
                 {
                     await _service.UpdateCharacterAsync(window.Character);
@@ -54,7 +54,7 @@ namespace GameApp.Views
             }
             else
             {
-                MessageBox.Show("Выберите персонажа для редактирования.");
+                MessageBox.Show("Please select a character to edit");
             }
         }
 
@@ -74,7 +74,7 @@ namespace GameApp.Views
         {
             if (CharacterGrid.SelectedItem is Character selected)
             {
-                var result = MessageBox.Show($"Удалить персонажа {selected.Name}?", "Подтверждение", MessageBoxButton.YesNo);
+                var result = MessageBox.Show($"Delete character {selected.Name}?", "Confirmation", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
                 {
                     await _service.DeleteCharacterAsync(selected.Id);
@@ -83,8 +83,13 @@ namespace GameApp.Views
             }
             else
             {
-                MessageBox.Show("Выберите персонажа для удаления.");
+                MessageBox.Show("Please select a character to delete");
             }
+        }
+
+        private void CharacterGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

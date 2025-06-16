@@ -10,21 +10,21 @@
     </Window.Background>
 
     <DockPanel>
-        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="10">
-            <Button Content=" Add " Click="AddButton_Click" Margin="0,0,10,0"/>
-            <Button Content=" Change " Click="EditButton_Click" Margin="0,0,10,0"/>
-            <Button Content=" Delete " Click="DeleteButton_Click"/>
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" Margin="20">
+            <Button Content=" Add " Click="AddButton_Click" Margin="0,0,10,0" MaxHeight="60"/>
+            <Button Content=" Change " Click="EditButton_Click" Margin="0,0,10,0" MaxHeight="60"/>
+            <Button Content=" Delete " Click="DeleteButton_Click" Margin="0,0,10,0" MaxHeight="60"/>
         </StackPanel>
 
         <DataGrid x:Name="CharacterGrid"
                   AutoGenerateColumns="False"
                   IsReadOnly="True"
                   Margin="10"
-                  SelectionMode="Single">
+                  SelectionMode="Single" SelectionChanged="CharacterGrid_SelectionChanged">
             <DataGrid.Columns>
-                <DataGridTextColumn Header=" Name " Binding="{Binding Name}" Width="*"/>
-                <DataGridTextColumn Header=" Level " Binding="{Binding Level}" Width="*"/>
-                <DataGridTextColumn Header=" Class " Binding="{Binding Class.Name}" Width="*"/>
+                <DataGridTextColumn Header=" Name  🎲 " Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header=" Level ⚔️ " Binding="{Binding Level}" Width="*"/>
+                <DataGridTextColumn Header=" Class 🧬 " Binding="{Binding Class.Name}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
     </DockPanel>

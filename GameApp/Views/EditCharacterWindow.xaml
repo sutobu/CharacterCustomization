@@ -1,7 +1,12 @@
 ﻿<Window x:Class="GameApp.Views.EditCharacterWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Редактировать персонажа" Height="250" Width="400">
+        Title="👾 Edit Character 👾" Height="250" Width="400">
+
+    <Window.Background>
+        <SolidColorBrush Color="#E1B2E2"/>
+    </Window.Background>
+
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -11,20 +16,20 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" Margin="0 5">
-            <Label Content="Имя:" Width="80"/>
+            <Label Content="🎲 Name:" Width="80"/>
             <TextBox x:Name="NameBox" Width="250"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0 5">
-            <Label Content="Уровень:" Width="80"/>
+            <Label Content="⚔️ Level:" Width="80"/>
             <TextBox x:Name="LevelBox" Width="250"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0 5">
-            <Label Content="Класс:" Width="80"/>
+            <Label Content="🧬 Class:" Width="80"/>
             <ComboBox x:Name="ClassComboBox" Width="250"/>
         </StackPanel>
 
-        <Button Grid.Row="3" Content="Сохранить" HorizontalAlignment="Right" Width="100" Margin="0 10 0 0" Click="SaveButton_Click"/>
+        <Button Grid.Row="3" Content="💾 Save" HorizontalAlignment="Center" Width="100" Margin="0,33,0,33" Click="SaveButton_Click"/>
     </Grid>
 </Window>
