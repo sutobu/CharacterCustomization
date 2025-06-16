@@ -10,9 +10,6 @@
 
   <ItemGroup>
     <None Remove="Assets\7481714.jpg" />
-    <None Remove="Assets\9259351.jpg" />
-    <None Remove="Assets\9259354.jpg" />
-    <None Remove="Assets\9285000.jpg" />
   </ItemGroup>
 
 
@@ -33,15 +30,6 @@
 
   <ItemGroup>
     <Resource Include="Assets\7481714.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\9259351.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\9259354.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Assets\9285000.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
