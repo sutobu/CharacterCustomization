@@ -4,14 +4,14 @@
              xmlns:local="clr-namespace:GameApp"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <Color x:Key="ForestGreen">#3d3b70</Color>
-        <Color x:Key="ForestYellow">#EBAAEB</Color>
+        <Color x:Key="Blue">#3d3b70</Color>
+        <Color x:Key="Pink">#EBAAEB</Color>
         <Color x:Key="DarkBlue">#060C36</Color>
         <Color x:Key="LightPink">#eecade</Color>
         
 
-        <SolidColorBrush x:Key="MainBackground" Color="{StaticResource ForestGreen}"/>
-        <SolidColorBrush x:Key="MainForeground" Color="{StaticResource ForestYellow}"/>
+        <SolidColorBrush x:Key="MainBackground" Color="{StaticResource Blue}"/>
+        <SolidColorBrush x:Key="MainForeground" Color="{StaticResource Pink}"/>
         <SolidColorBrush x:Key="MainForeground2" Color="{StaticResource LightPink}"/>
         <SolidColorBrush x:Key="MainFont" Color="{StaticResource DarkBlue}"/>
 

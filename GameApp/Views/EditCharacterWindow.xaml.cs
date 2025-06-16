@@ -17,12 +17,12 @@ namespace GameApp.Views
             _service = service;
             Character = character;
 
-            Loaded += EditCharacterWindow_Loaded; // ✅ Delay loading until UI is ready
+            Loaded += EditCharacterWindow_Loaded; 
         }
 
         private async void EditCharacterWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            _classes = await _service.GetClassesAsync(); // ✅ Load from database
+            _classes = await _service.GetClassesAsync();
             ClassComboBox.ItemsSource = _classes;
             ClassComboBox.DisplayMemberPath = "Name";
             ClassComboBox.SelectedValuePath = "Id";

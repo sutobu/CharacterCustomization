@@ -18,5 +18,6 @@ namespace GameApp.Models
 
         public List<Skill> Skills { get; set; } = new();
         public List<Equipment> Equipment { get; set; } = new();
+
     }
 }

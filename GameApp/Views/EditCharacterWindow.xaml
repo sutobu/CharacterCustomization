@@ -19,6 +19,8 @@
             <Label Content="🎲 Name:" Width="80"/>
             <TextBox x:Name="NameBox" Width="250"/>
         </StackPanel>
+        
+
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0 5">
             <Label Content="⚔️ Level:" Width="80"/>
